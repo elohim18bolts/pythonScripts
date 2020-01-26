@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Scripts
+{% endblock %}
+
+{% block headerTitle %}Scripts For U 😄{% endblock %}
+{% block headerSub %}Get Used To Programming{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron container">
+        <div class="container">
+            <h4 class="display-6 text-center">Scripts List</h4>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#getProduct" class="link" 
+                data-toggle="collapse"  aria-expanded="false" 
+                aria-controls="getProduct">Get Product Of All Other Elements</a></li>
+            <div class="collapse" id="getProduct">
+                <div class="card card-body">
+                    <p>
+                        Giben an array of integers, return a new array such that each 
+                        element at index <em>i</em> of the new array is the product of all the numbers in the original array
+                        except the one at <em>i</em>.
+                    </p>
+                    <p>
+                        For Example , if our input was <var>[1, 2, 3, 4, 5]</var>, the expected outpu would be <var>[120, 60, 40, 30, 24]</var>. 
+                        If our input was <var>[3, 2, 1]</var>, the expected output would be <var>[2, 3, 6]</var>.
+                    </p>
+                </div>
+            </div>
+        </ul>
+    </div>
+{% endblock %}
