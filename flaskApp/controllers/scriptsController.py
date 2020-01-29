@@ -1,12 +1,14 @@
 import views.scripts, sys
+from models.model import Model
 class ScriptController(object):
-    def scripts(self):
-        return views.scripts.scriptsView()
+    def __init__(self):
+        self.scripts = {}
 
-    def displayDescription(self, scriptName):
-        try:
-            with open(scriptName, "r") as script:
-                content =  script.read()
-            return content
-        except:
-            return sys.exc_info()[0]
+    def loadView(self):
+        return views.scripts.scriptsView(self.scripts)
+
+    def displayDescription(self, scriptsDir):
+        #Get the file list
+        model = Model()
+        self.scripts = model.getListOfScripts(scriptsPath=scriptsDir)
+        

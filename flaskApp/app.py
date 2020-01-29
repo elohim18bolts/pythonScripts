@@ -7,11 +7,14 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     controller = homeController.HomeController()
-    return controller.home()
+    return controller.loadView()\
+        
 @app.route("/scripts")
 def scripts():
+    scriptsPath = "./resources/files/codingQuestions"
     controller = scriptsController.ScriptController()
-    return controller.scripts()
+    controller.displayDescription(scriptsPath)
+    return controller.loadView()
 
 
 app.run(debug = True)

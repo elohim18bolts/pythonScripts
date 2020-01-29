@@ -2,5 +2,5 @@ import views.home
 
 class HomeController(object):
 
-    def home(self):
+    def loadView(self):
         return views.home.homeView()

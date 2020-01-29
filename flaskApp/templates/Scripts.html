@@ -14,22 +14,21 @@
             <h4 class="display-6 text-center">Scripts List</h4>
         </div>
         <ul class="list-group">
-            <li class="list-group-item"><a href="#getProduct" class="link" 
+            {% for script in scripts %}
+            <li class="list-group-item"><a href="#{{ script.name }}" class="link" 
                 data-toggle="collapse"  aria-expanded="false" 
-                aria-controls="getProduct">Get Product Of All Other Elements</a></li>
-            <div class="collapse" id="getProduct">
+                aria-controls="{{ script.name }}">{{ script.title }}</a></li>
+            <div class="collapse" id="{{ script.name }}">
                 <div class="card card-body">
-                    <p>
-                        Giben an array of integers, return a new array such that each 
-                        element at index <em>i</em> of the new array is the product of all the numbers in the original array
-                        except the one at <em>i</em>.
-                    </p>
-                    <p>
-                        For Example , if our input was <var>[1, 2, 3, 4, 5]</var>, the expected outpu would be <var>[120, 60, 40, 30, 24]</var>. 
-                        If our input was <var>[3, 2, 1]</var>, the expected output would be <var>[2, 3, 6]</var>.
-                    </p>
+                    {{ script.content|safe }}
+                    <div class="col-auto ml-auto">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#{{script.name}}Optimal">Optimal Solution</button>
+                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#{{script.name}}Naive">Naive Solution</button>
+                    </div>
                 </div>
+                
             </div>
+            {% endfor %}
         </ul>
     </div>
 {% endblock %}
