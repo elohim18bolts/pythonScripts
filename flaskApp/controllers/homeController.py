@@ -1,6 +1,6 @@
-import views.home
+import flaskApp.views.home as homeView
 
 class HomeController(object):
 
     def loadView(self):
-        return views.home.homeView()
+        return homeView.homeView()

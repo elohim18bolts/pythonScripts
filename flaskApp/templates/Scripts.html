@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Scripts
+Scripts
 {% endblock %}
 
 {% block headerTitle %}Scripts For U 😄{% endblock %}
@@ -9,26 +9,70 @@
 
 {% block content %}
 
-    <div class="jumbotron container">
-        <div class="container">
-            <h4 class="display-6 text-center">Scripts List</h4>
+<div class="jumbotron container">
+  <div class="container">
+    <h4 class="display-6 text-center">Scripts List</h4>
+  </div>
+  <ul class="list-group">
+    {% for script in scripts %}
+    <li class="list-group-item"><a href="#{{ script.name }}" class="link" data-toggle="collapse" aria-expanded="false"
+        aria-controls="{{ script.name }}">{{ script.title }}</a></li>
+    <div class="collapse" id="{{ script.name }}">
+      <div class="card card-body">
+        {{script.content|safe}}
+        <div class="col-auto ml-auto">
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+            data-target="#{{script.name}}Optimal">Optimal Solution</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal"
+            data-target="#{{script.name}}Naive">Naive Solution</button>
         </div>
-        <ul class="list-group">
-            {% for script in scripts %}
-            <li class="list-group-item"><a href="#{{ script.name }}" class="link" 
-                data-toggle="collapse"  aria-expanded="false" 
-                aria-controls="{{ script.name }}">{{ script.title }}</a></li>
-            <div class="collapse" id="{{ script.name }}">
-                <div class="card card-body">
-                    {{ script.content|safe }}
-                    <div class="col-auto ml-auto">
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#{{script.name}}Optimal">Optimal Solution</button>
-                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#{{script.name}}Naive">Naive Solution</button>
-                    </div>
-                </div>
-                
-            </div>
-            {% endfor %}
-        </ul>
+      </div>
+
     </div>
+    <!-- Modal -->
+    <!-- You have to set the id of the modal equal to the file name follow by Naive or Optimal  -->
+    <!-- depending if the solution to show is the naive or optimal one. -->
+    <div class="modal fade" id="{{script.name}}Optimal" tabindex="-1" role="dialog"
+      aria-labelledby="solutionTitle" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-scrollable"" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="solutionTitle">{{ script.title }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body  col-auto">
+            <pre><code class="java">{{script.codeOptimal}}</code></pre>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="{{ script.name }}Naive" tabindex="-1" role="dialog"
+      aria-labelledby="solutionTitle" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="solutionTitle">{{script.title}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <pre><code class="java">{{script.codeNaive}}</code></pre>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </ul>
+</div>
 {% endblock %}

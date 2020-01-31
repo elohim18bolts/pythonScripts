@@ -1,5 +1,5 @@
 import os
-from models.scriptModel import Script
+from flaskApp.models.scriptModel import Script
 class Model(object):
     def getFiles(self, scriptsPath):
         if(not os.path.isdir(scriptsPath)):
@@ -10,8 +10,10 @@ class Model(object):
     def getListOfScripts(self,scriptsPath):
         
         files = self.getFiles(scriptsPath)
-        print(files)
         scripts = []
         for file in files:
-            scripts.append(Script(scriptsPath + os.path.sep + file))
+            filename = os.path.splitext(os.path.basename(file))[0]
+            route = os.path.split(scriptsPath)[0]
+            codePath = route + os.path.sep + "solutions" + os.path.sep + filename
+            scripts.append(Script(scriptsPath + os.path.sep + file,codePath))
         return scripts
